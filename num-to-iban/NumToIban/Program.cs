@@ -20,41 +20,43 @@ namespace NumToIban
 
             do
             {
-                Console.WriteLine("Anna vanhanmuotoinen tilinumero: " + bban);
+                Console.WriteLine("Give an old type bank account number: ");
                 bban = Console.ReadLine();
                 //Delete leading spaces
                 bban.Trim();
 
                 if (bban.Length < 9)
                 {
-                    message = "Liian lyhyt tilinumero. Syötä vähintään 9 merkkiä. ";
+                    message = "Accountnumber was too short. Give at least 9 digits. ";
                     Console.WriteLine(message);
                     Console.ReadKey();
-                }
-
+                    iban = "";
+                    right = true;
+                               }
                 else
                 {
-                    //System.Text.StringBuilder ib = new System.Text.StringBuilder(bban);
+                    //Testing input string 
                     for (int i = 0; i < (bban.Length); i++)
                     {
+                        //Only numbers are allowed 
                         if (int.TryParse(bban.Substring(i, 1), out x) == true)
-                        //string x = numerot.Substring(ib[i], 1);
-                        //if (x != null) 
                         {
-                            //iban.Append(c);
+                            //Add the digit to iban
                             iban = iban + x;
                         }
                     }
-
-                    Console.WriteLine(iban);
-                    Console.ReadKey();
+                    //Console.WriteLine(iban);
+                    //Console.ReadKey();
                 }
+                // At least 9 numbers needed
                 if (iban.Length >= 9)
                 {
+                    //how many zeros needed for string of 14 digits 
                     string middleIban = "";
                     for (int j = 0; j < (14 - iban.Length); j++)
                     { middleIban += "0"; }
                     right = false;
+                    // If iban string begins with 4 or 5, zeros need to be added after 7. element, otherwise after 6. element
                     if (iban.Substring(0, 1) == "4" || iban.Substring(0, 1) == "5")
                     {
                         string startIban = iban.Substring(0, 7);
@@ -68,8 +70,8 @@ namespace NumToIban
                         string startIban = iban.Substring(0, 6);
                         string endIban = iban.Substring(6, iban.Length - 6);
                         iban = startIban + middleIban + endIban;
-                        Console.WriteLine(iban);
-                        Console.ReadKey();
+                        //Console.WriteLine(iban);
+                        //Console.ReadKey();
                     }
                 }
             } while (right == true);
@@ -85,10 +87,9 @@ namespace NumToIban
                 iban = "FI" + check.ToString() + iban;
             }
 
-            Console.WriteLine(iban);
+            Console.WriteLine("IBAN code is " + iban);
             Console.ReadKey();
         }
-
     }
 }
-}
+
