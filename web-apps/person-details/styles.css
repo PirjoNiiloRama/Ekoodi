@@ -8,13 +8,13 @@
 h1,h2,h3 {
     color: darkblue;
 }
+
 .addDetails {
     padding: 5px;
     border-radius: 10px;
-    width: 300px;
+    width: 400px;
     margin: auto;
     margin-bottom: 20px;
-
     border-style: groove;
 }
 #userDetails th{
@@ -47,6 +47,7 @@ input {
 
 #inputTable td {
     padding-left: 12px;
+    text-align: left;
 }
 
 #resultsTable {
@@ -56,9 +57,9 @@ input {
 
 #resultsTable th {
     border: 1px solid black;
-    /*background-color: gainsboro;*/
     column-width: 50px;
     color: darkblue;
+    text-align: left;
 }
 
 
@@ -81,8 +82,9 @@ input {
 }
 
 #resultsTable td {
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+    /*border-left: 1px solid black;
+    border-right: 1px solid black;*/
+    text-align: left;
 }
 
 #resultsTable td:last-child, #resultsTable td:nth-child(5) {

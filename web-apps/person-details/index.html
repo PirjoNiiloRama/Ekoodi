@@ -3,17 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Users</title>
-    <link rel="stylesheet" type="text/css" href="styles.css"/>
+
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 
-    <script src="scripts.js"></script>
-    <script type="text/javascript" href="Libs\lodash.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
 
+    <script type="text/javascript" src="libs/lodash.min.js"></script>
+
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="contact-table-helper.js"></script>
+
+    <script type="text/javascript" src="contact.js"></script>
+    <script type="text/javascript" src="contact-store.js"></script>
+    <!--script type="text/javascript" src="scripts.js"></script-->
+    <script type="text/javascript" src="utils.js"></script>
+    <script type="text/javascript" src="onClickFunctions.js"></script>
 </head>
+
 <body onload="onLoad()">
+<script>
+    // Global variable needed
+    var modifyIndex = -1; //Start with smaller value than any index valua
+    function onLoad() {
+        if (typeof (Storage) !== 'undefined') {
+            var data = localStorage.getItem("data");
+            if (data == null) {
+                contacts = [];
+                return;
+            }
+            contacts = JSON.parse(data);
+            contactsApp.contactTableHelper.fillTable();
+        }
+    }
+</script>
+
+<body>
 
 <div class="header1">
 <h1>USER INFORMATION</h1>
@@ -25,31 +53,41 @@
 
 <div class="addDetails">
     <h3>USER DETAILS</h3>
-    <table id="userDetails">
+    <table id="userDetails" class="mdl-data-table mdl-js-data-table">
+        <thead>
+        <!--<tr>
+        <th colspan="2">User details</th>
+        </tr>-->
+        </thead>
+        <tbody>
         <tr>
-            <th>First name</th><td><input id="firstName" type="text" ></td>
+            <th>First name</th><td><input id="firstName" type="text" class="mdl-data-table__cell--non-numeric"></td>
         </tr>
         <tr>
-            <th>Last name</th><td><input id="lastName" type="text" ></td>
+            <th>Last name</th><td><input id="lastName" type="text" class="mdl-data-table__cell--non-numeric"></td>
         </tr>
         <tr>
-            <th>Phone</th><td><input id="phone" type="text" ></td>
+            <th>Phone</th><td><input id="phone" type="text" class="mdl-data-table__cell--non-numeric"></td>
         </tr>
         <tr>
-            <th>Street address</th><td><input id="street" type="text" ></td>
+            <th>Street address</th><td><input id="street" type="text" class="mdl-data-table__cell--non-numeric"></td>
         </tr>
         <tr>
-            <th>City</th><td><input id="city" type="text" ></td>
+            <th>City</th><td><input id="city" type="text" class="mdl-data-table__cell--non-numeric"></td>
         </tr>
+        </tbody>
     </table>
-    <div id="addButtonDiv" ><button id="addButton" onclick="onAddClicked()">Add</button></div>
+    <div id="addButtonDiv" >
+        <button id="addButton" onclick="contactsApp.onClickFunctions().onClicked()">Add
+        </button>
+    </div>
 </div>
 
 
 
 <div class="showResults">
     <h3>ALL USERS</h3>
-    <table id ="resultsTable" class=center">
+    <table id ="resultsTable" class="mdl-data-table mdl-js-data-table">
         <tr>
             <th>First name</th>
             <th>Last name</th>
@@ -60,7 +98,8 @@
         </tr>
     </table>
 </div>
-
 </body>
+
+
 </html>
 
